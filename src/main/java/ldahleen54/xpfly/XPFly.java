@@ -1,12 +1,7 @@
 package ldahleen54.xpfly;
 
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.tree.LiteralCommandNode;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
-import io.papermc.paper.command.brigadier.Commands;
-import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -66,12 +61,13 @@ public final class XPFly extends JavaPlugin {
 
     private void drainXpFromFlyingPlayers() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            UUID uuid = player.getUniqueId();
             int xp = player.getTotalExperience();
 
             if (xp > 0) {
+                player.setFlyingFallDamage(TriState.TRUE);
                 if (!player.getAllowFlight()) {
-                    player.sendMessage("You can now fly by double tapping the spacebar.");
+                    player.sendMessage("You can now fly by double tapping the spacebar. When flying xp will be drained over time.");
+                    player.sendMessage("When you run out of xp you will drop to the ground and possibly die.");
                     player.setAllowFlight(true);
                 }
             } else {
