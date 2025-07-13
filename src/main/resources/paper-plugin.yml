@@ -1,0 +1,5 @@
+name: xpfly
+version: '1.0-SNAPSHOT'
+main: ldahleen54.xpfly.XPFly
+authors: [ ldahleen54 ]
+api-version: '1.20'
